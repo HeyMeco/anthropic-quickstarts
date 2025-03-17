@@ -138,6 +138,32 @@ Alternative access points:
 - Desktop view only: [http://localhost:6080/vnc.html](http://localhost:6080/vnc.html)
 - Direct VNC connection: `vnc://localhost:5900` (for VNC clients)
 
+## Host and Port Configuration
+
+You can use environment variables to configure the hostname/IP and ports for the services:
+
+- `COMPUTER_USE_DEMO_HOST`: Host IP/interface for the HTTP server (default: `::`)
+- `COMPUTER_USE_DEMO_INTERFACE_HOST`: Hostname to display in URLs (default: `localhost`)
+- `COMPUTER_USE_DEMO_PORT`: Port for the main HTTP server (default: `8080`)
+- `COMPUTER_USE_DEMO_VNC_HOST`: VNC server hostname (default: `localhost`)
+- `COMPUTER_USE_DEMO_VNC_PORT`: VNC server port (default: `5900`)
+- `COMPUTER_USE_DEMO_NOVNC_PORT`: noVNC web interface port (default: `6080`)
+- `STREAMLIT_SERVER_PORT`: Streamlit server port (default: `8501`)
+
+For example, to run the container with a custom host IP:
+
+```bash
+docker run \
+    -e ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
+    -e COMPUTER_USE_DEMO_INTERFACE_HOST=192.168.1.100 \
+    -v $HOME/.anthropic:/home/computeruse/.anthropic \
+    -p 5900:5900 \
+    -p 8501:8501 \
+    -p 6080:6080 \
+    -p 8080:8080 \
+    -it ghcr.io/anthropics/anthropic-quickstarts:computer-use-demo-latest
+```
+
 ## Screen size
 
 Environment variables `WIDTH` and `HEIGHT` can be used to set the screen size. For example:
